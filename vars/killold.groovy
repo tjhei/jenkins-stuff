@@ -5,6 +5,7 @@ import jenkins.model.CauseOfInterruption.UserInterruption
 
 def killOldBuilds() {
   while(currentBuild.rawBuild.getPreviousBuildInProgress() != null) {
-    currentBuild.rawBuild.getPreviousBuildInProgress().doKill()
+    currentBuild.rawBuild.getPreviousBuildInProgress().doTerm()
+    //.doKill()
   }
 }
