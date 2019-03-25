@@ -4,7 +4,8 @@ import jenkins.model.CauseOfInterruption.UserInterruption
 
 // from https://stackoverflow.com/questions/40760716/jenkins-abort-running-build-if-new-one-is-started
 
-def killOldBuilds() {
+def killOldBuildsOld() {
+  // leaves build dir around, not great
   while(currentBuild.rawBuild.getPreviousBuildInProgress() != null) {
     currentBuild.rawBuild.getPreviousBuildInProgress().doKill()
     //.doTerm crashes jenkins
@@ -13,7 +14,8 @@ def killOldBuilds() {
 
 
 
-def abortPreviousBuilds() {
+def killOldBuilds() {
+    // works correctly and will clean workspace!
     Run previousBuild = currentBuild.rawBuild.getPreviousBuildInProgress()
 
     while (previousBuild != null) {
